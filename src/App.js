@@ -15,7 +15,7 @@ class App extends Component {
   constructor(props){
     super(props)
     this.state = {
-      // default state, can't be updated
+      // default states
       searchTerm:'',
       hintText: 'Hit enter to search',
     };
@@ -33,7 +33,9 @@ class App extends Component {
         // take the old props and spread them out here
         ...prevState,
         // then we overwrite the ones we want
-        searchTerm: value
+        searchTerm: value,
+        // Set the hint text only when there are two or more values, otherwise it is blank
+        hintText: value.length > 2 ? `Hit enter to search ${value}`: '',
       }));
     };
    
@@ -41,14 +43,11 @@ class App extends Component {
     const {value} = event.target;
     console.log(value);
     if (value.length > 2 && event.key === 'Enter'){
-      console.log(`Search for ${value}`);
+      // console.log(`Search for ${value}`);
       
     }
     // console.log(event.key);
   }
-
-
-
 
   render() {
     const { searchTerm } = this.state;

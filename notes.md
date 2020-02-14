@@ -41,3 +41,7 @@ async function getData() {
 
 - asyncronous function by added async before the function `async function getData (){}`
 - use `await` keyword inside `async` function.
+
+## State
+
+(Understanding state)[https://codeburst.io/react-js-understanding-state-e875911e921c]

@@ -19,8 +19,13 @@ class App extends Component {
       searchTerm:'',
       hintText: 'Hit enter to search',
     };
+    this.searchGiphy = this.searchGiphy.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+    this.handleKeyPress = this.handleKeyPress.bind(this);
+   
+
   }
-  // With create react app , we can write methods inside component as arrow functions instead of using constructor and bind
+
   handleChange = event => {
     // target is the element it, value is what is in the input
     // const value = event.target.value 
@@ -41,7 +46,9 @@ class App extends Component {
     const {value} = event.target;
     console.log(value);
     if (value.length > 2 && event.key === 'Enter'){
-      console.log(`Search for ${value}`);
+      // console.log(`Search for ${value}`);
+      // here we call the search giphy function using the search term
+      this.props.searchGiphy(value);
       
     }
     // console.log(event.key);
@@ -50,28 +57,40 @@ class App extends Component {
 
 
 
+  // A function that searches the giphy api using fetch and puts the search term into the query url and then we can use the results
+  searchGiphy = async searchTerm => {
+    // first try fetch, if it fails it gets caught below
+    try {
+      const response = await fetch(
+        `https://api.giphy.com/v1/gifs/search?api_key=${process.env.REACT_APP_API_KEY}=${searchTerm}&limit=25&offset=0&rating=PG&lang=en`
+      )
+      //here the raw response is converted in json data
+      //instead of typing data.data we ca use this {data}
+      
+      const {data} = await response.json();
+      
+      
+      this.setState((prevState, props) => ({
+        ...prevState,
+        // gets the first result and puts it in the state
+        gif: data[0],
+      }))
+
+
+    } catch (error){}
+  };
+
+  // With create react app , we can write methods inside component as arrow functions instead of using constructor and bind
+
+
   render() {
-    const { searchTerm } = this.state;
+   
     return(
       <div className="page">
         <Header />
-        <div className="search grid">
-          {/* Stack of gif images */}
-
-          {/* Input field */}
-          <input
-            className="input grid-item"
-            placeholder="Type Something"
-            // run a function
-            onChange={this.handleChange}
-            // Grabbing info about what key is pressed, we are interested in enter
-            onKeyPress={this.handleKeyPress}
-            // Using the value in the state
-            value={searchTerm}
-            />
-        </div>
+        <Search searchGiphy={ this.searchGiphy.bind()}{...this.props}/>
         {/* here we pass out userHint and all of our state using a spread operator */}
-        <UserHint {...this.state}/>
+        <UserHint {...this.props}/>
       </div>
     )
   };

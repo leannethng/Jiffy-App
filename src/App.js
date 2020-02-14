@@ -4,10 +4,12 @@ import Search from './components/Search'
 // import in image
 import loader from './images/loader.svg'
 
+
+
 const UserHint = ({loading, hintText}) => (
   <div className='user-hint'>
     {/* Check if we have a loading state and render out either the spinner image or hint text. This is a ternary operator  */}
-    {loading ? <img className='block mx-auto' src={loader}/> : hintText}
+    {loading ? <img className='block mx-auto' src={loader} alt="loading spinner"/> : hintText}
   </div>
 )
 
@@ -20,6 +22,20 @@ class App extends Component {
       hintText: 'Hit enter to search',
     };
   }
+
+  // A function that searches the giphy api using fetch and puts the search term into the query url and then we can use the results
+  searchGiphy = async(searchTerm) => {
+    // first try fetch, if it fails it gets caught below
+    try {
+      const response = await fetch(
+        `https://api.giphy.com/v1/gifs/search?api_key=${process.env.REACT_APP_API_KEY}=${searchTerm}&limit=25&offset=0&rating=PG&lang=en`
+      )
+      //here the raw response is converted in json data
+      const data = await response.json();
+      console.log(data);
+
+    } catch (error){}
+  };
   // With create react app , we can write methods inside component as arrow functions instead of using constructor and bind
   handleChange = event => {
     // target is the element it, value is what is in the input
@@ -44,6 +60,8 @@ class App extends Component {
     console.log(value);
     if (value.length > 2 && event.key === 'Enter'){
       // console.log(`Search for ${value}`);
+      // here we call the search giphy function using the search term
+      this.searchGiphy(value);
       
     }
     // console.log(event.key);

@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import Header from './components/Header'
-import Search from './components/Search'
+//import Search from './components/Search'
 // import in image
 import loader from './images/loader.svg'
 

@@ -4,6 +4,13 @@ import Header from './components/Header'
 // import in image
 import loader from './images/loader.svg'
 
+// Create a random choice funtion which takes in an array and returns a random index number. This is a closure!
+const randomChoice = arr => {
+  const randIndex = Math.floor(Math.random()*arr.length);
+  console.log(arr[randIndex]);
+  return arr[randIndex];
+};
+
 const UserHint = ({loading, hintText}) => (
   <div className='user-hint'>
     {/* Check if we have a loading state and render out either the spinner image or hint text. This is a ternary operator  */}
@@ -19,6 +26,8 @@ class App extends Component {
       searchTerm:'',
       hintText: '',
       gif: null,
+      // Creating an empty array for adding gifs to
+      gifs: [],
     };
   }
 
@@ -34,13 +43,22 @@ class App extends Component {
       
       const {data} = await response.json();
       
+
+      // Here we can grab a random gif from our image object
+      const randomGif = randomChoice(data);
+      
+      // console.log(data);
       
       this.setState((prevState, props) => ({
         ...prevState,
-        // gets the first result and puts it in the state
-        gif: data[0],
+        // gets the random result and puts it in the state
+        gif: randomGif,
+        // here we use spread to take previous gifs and then spread them out, ten add new random gif to the end
+        gifs: [...prevState.gifs,randomGif ],
+        
       }))
-
+      // console.log(data[0]);
+      // console.log(data[Math.floor(Math.random()*data.length)]);
 
     } catch (error){}
   };
@@ -82,15 +100,15 @@ class App extends Component {
         <Header />
         <div className="search grid">
           {/* Stack of gif images */}
-          {/* Only renders when we have a gif in the state  */}
-          {gif && (
-            <video
-              className='grid-item video'
-              autoPlay
-              loop
-              src={gif.images.original.mp4}
-              />
-           )}
+          {/* here we loop over our array of gif images fromt he state and create multiple videos from it */}
+   
+           {this.state.gifs.map(gif =>
+              <video
+                className='grid-item video'
+                autoPlay
+                loop
+                src={gif.images.original.mp4}
+              />)}
           {/* Input field */}
           <input
             className="input grid-item"

@@ -30,7 +30,7 @@ class App extends Component {
       gifs: [],
     };
   }
-
+ 
   // A function that searches the giphy api using fetch and puts the search term into the query url and then we can use the results
   searchGiphy = async searchTerm => {
     // first try fetch, if it fails it gets caught below
@@ -57,7 +57,7 @@ class App extends Component {
         gifs: [...prevState.gifs,randomGif ],
         
       }))
-      // console.log(data[0]);
+        // console.log(this.state.gif.index);
       // console.log(data[Math.floor(Math.random()*data.length)]);
 
     } catch (error){}
@@ -68,7 +68,7 @@ class App extends Component {
     // const value = event.target.value 
     // console.log(event.target.value)
     // can use this way of writing as value is repeated
-    console.log(event.target.key);
+    // console.log(event.target.key);
       const {value} = event.target;
       // by setting the search term in the state and using that on the input as the value we have created a controlled input. 
       this.setState((prevState, props) => ({
@@ -94,16 +94,17 @@ class App extends Component {
   }
 
   render() {
-    const { searchTerm, gif } = this.state;
+    const { searchTerm, gif, gifs, index } = this.state;
     return(
       <div className="page">
         <Header />
         <div className="search grid">
           {/* Stack of gif images */}
           {/* here we loop over our array of gif images fromt he state and create multiple videos from it */}
-   
+         
            {this.state.gifs.map(gif =>
               <video
+              // key = {this.state.gifs.index}
                 className='grid-item video'
                 autoPlay
                 loop

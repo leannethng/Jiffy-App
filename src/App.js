@@ -12,9 +12,6 @@ const randomChoice = arr => {
   return arr[randIndex];
 };
 
-
-
-
 class App extends Component {
   constructor(props){
     super(props)
@@ -27,8 +24,6 @@ class App extends Component {
     };
     this.handleKeyPress = this.handleKeyPress.bind(this);
     this.handleChange = this.handleChange.bind(this);
-
-
   }
  
   // A function that searches the giphy api using fetch and puts the search term into the query url and then we can use the results
@@ -40,7 +35,6 @@ class App extends Component {
       )
       //here the raw response is converted in json data
       //instead of typing data.data we ca use this {data}
-      
       const {data} = await response.json();
       
 
@@ -48,18 +42,16 @@ class App extends Component {
       const randomGif = randomChoice(data);
       
       // console.log(data);
-      
       this.setState((prevState, props) => ({
         ...prevState,
         // here we use spread to take previous gifs and then spread them out, ten add new random gif to the end
         gifs: [...prevState.gifs,randomGif ],
-        
       }))
         // console.log(this.state.gif.index);
       // console.log(data[Math.floor(Math.random()*data.length)]);
-
     } catch (error){}
   };
+
   // With create react app , we can write methods inside component as arrow functions instead of using constructor and bind
   handleChange = event => {
     // target is the element it, value is what is in the input
@@ -86,7 +78,6 @@ class App extends Component {
       // console.log(`Search for ${value}`);
       // here we call the search giphy function using the search term
       this.searchGiphy(value);
-      
     }
     // console.log(event.key);
   }

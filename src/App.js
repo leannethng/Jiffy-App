@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import Header from './components/Header'
 import Search from './components/Search'
-// import UserHint from './components/UserHint'
+import UserHint from './components/UserHint'
 // import in image
 import loader from './images/loader.svg'
 
@@ -12,12 +12,8 @@ const randomChoice = arr => {
   return arr[randIndex];
 };
 
-const UserHint = ({loading, hintText}) => (
-  <div className='user-hint'>
-    {/* Check if we have a loading state and render out either the spinner image or hint text. This is a ternary operator  */}
-    {loading ? <img className='block mx-auto' src={loader} alt="loading spinner"/> : hintText}
-  </div>
-)
+
+
 
 class App extends Component {
   constructor(props){
@@ -109,7 +105,7 @@ class App extends Component {
           handleChange={this.handleChange} 
         />
         {/* here we pass out userHint and all of our state using a spread operator */}
-        <UserHint {...this.state}/>
+        <UserHint {...this.state} />
       </div>
     )
   };

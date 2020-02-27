@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import Header from './components/Header'
-//import Search from './components/Search'
+import Search from './components/Search'
+// import UserHint from './components/UserHint'
 // import in image
 import loader from './images/loader.svg'
 
@@ -25,10 +26,13 @@ class App extends Component {
       // default states
       searchTerm:'',
       hintText: '',
-      gif: null,
       // Creating an empty array for adding gifs to
       gifs: [],
     };
+    this.handleKeyPress = this.handleKeyPress.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+
+
   }
  
   // A function that searches the giphy api using fetch and puts the search term into the query url and then we can use the results
@@ -51,8 +55,6 @@ class App extends Component {
       
       this.setState((prevState, props) => ({
         ...prevState,
-        // gets the random result and puts it in the state
-        gif: randomGif,
         // here we use spread to take previous gifs and then spread them out, ten add new random gif to the end
         gifs: [...prevState.gifs,randomGif ],
         
@@ -94,34 +96,18 @@ class App extends Component {
   }
 
   render() {
-    const { searchTerm, gif, gifs, index } = this.state;
+    // const { searchTerm, gif, gifs, index } = this.state;
     return(
       <div className="page">
         <Header />
-        <div className="search grid">
-          {/* Stack of gif images */}
-          {/* here we loop over our array of gif images fromt he state and create multiple videos from it */}
-         
-           {this.state.gifs.map(gif =>
-              <video
-              // key = {this.state.gifs.index}
-                className='grid-item video'
-                autoPlay
-                loop
-                src={gif.images.original.mp4}
-              />)}
-          {/* Input field */}
-          <input
-            className="input grid-item"
-            placeholder="Type Something"
-            // run a function
-            onChange={this.handleChange}
-            // Grabbing info about what key is pressed, we are interested in enter
-            onKeyPress={this.handleKeyPress}
-            // Using the value in the state
-            value={searchTerm}
-            />
-        </div>
+        <Search 
+          // Items held in the state are passed down like this         
+          gifs={this.state.gifs} 
+          searchTerm={this.state.searchTerm} 
+          // methods/functions that manipulate state are passed down like this
+          handleKeyPress={this.handleKeyPress} 
+          handleChange={this.handleChange} 
+        />
         {/* here we pass out userHint and all of our state using a spread operator */}
         <UserHint {...this.state}/>
       </div>

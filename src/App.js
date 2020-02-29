@@ -3,7 +3,7 @@ import Header from './components/Header'
 import Search from './components/Search'
 import UserHint from './components/UserHint'
 // import in image
-import loader from './images/loader.svg'
+
 
 // Create a random choice funtion which takes in an array and returns a random index number. This is a closure!
 const randomChoice = arr => {
@@ -19,6 +19,7 @@ class App extends Component {
       // default states
       searchTerm:'',
       hintText: '',
+      loading: false,
       // Creating an empty array for adding gifs to
       gifs: [],
     };
@@ -28,6 +29,12 @@ class App extends Component {
  
   // A function that searches the giphy api using fetch and puts the search term into the query url and then we can use the results
   searchGiphy = async searchTerm => {
+    this.setState({
+      // Here we set loading state to true to show spinner
+      loading:true
+    })
+
+
     // first try fetch, if it fails it gets caught below
     try {
       const response = await fetch(

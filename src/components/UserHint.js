@@ -1,8 +1,10 @@
 import React, {Component} from 'react'
+import loader from '../images/loader.svg'
+
 
 class UserHint extends Component {
   render(){
-    const { loading, hintText, loader} = this.props;
+    const { loading, hintText} = this.props;
     return(
       
         <div className='user-hint'>

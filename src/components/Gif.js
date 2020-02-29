@@ -5,7 +5,6 @@ class Gif extends Component {
     const {images} = this.props
     return (
       <video
-      // key = {this.state.gifs.index}
         className='grid-item video'
         autoPlay
         loop

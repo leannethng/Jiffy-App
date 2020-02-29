@@ -12,9 +12,9 @@ class Search extends Component {
           {/* Stack of gif images */}
           {/* here we loop over our array of gif images fromt he state and create multiple videos from it */}
          
-          {gifs.map(gif =>
+          {gifs.map((gif,i) =>
           //  spread out all of our properties onto the gif component                                                                   
-            <Gif {...gif}/>
+            <Gif key={i}{...gif}/>
           )}
           {/* Input field */}
           <input

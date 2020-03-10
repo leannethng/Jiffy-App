@@ -2,7 +2,8 @@ import React, {Component} from 'react'
 import Header from './components/Header'
 import Search from './components/Search'
 import UserHint from './components/UserHint'
-// import in image
+
+
 
 
 // Create a random choice funtion which takes in an array and returns a random index number. This is a closure!
@@ -62,6 +63,7 @@ class App extends Component {
         gifs: [...prevState.gifs,randomGif ],
         // Turn off the loading spinner again
         loading: false,
+        hintText: `Hit enter to see more ${searchTerm}`
       }))
         // console.log(this.state.gif.index);
       // console.log(data[Math.floor(Math.random()*data.length)]);
@@ -103,13 +105,30 @@ class App extends Component {
       this.searchGiphy(value);
     }
     // console.log(event.key);
+  };
+
+  // Method that resets the set, through clearing everything out and making it default again
+  clearSearch = () => {
+    this.setState((prevState, props) => ({
+      ...prevState,
+      searchTerm:'',
+      hintText: '',
+      loading: false,
+      gifs: [],
+    }))
   }
+
 
   render() {
     // const { searchTerm, gif, gifs, index } = this.state;
     return(
       <div className="page">
-        <Header />
+        <Header 
+          clearSearch = {this.clearSearch} 
+          gifs={this.state.gifs} 
+        />
+       
+        
         <Search 
           // Items held in the state are passed down like this         
           gifs={this.state.gifs} 

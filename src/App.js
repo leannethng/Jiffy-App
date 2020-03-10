@@ -43,7 +43,14 @@ class App extends Component {
       //here the raw response is converted in json data
       //instead of typing data.data we ca use this {data}
       const {data} = await response.json();
-      
+
+      // Here we check if the array of results is empty
+      //  if it is we throw and error which will stop the
+      // code here and handle it in the catch area
+
+      if(!data.length){
+        throw `Nothing Found for ${searchTerm}`
+      }
 
       // Here we can grab a random gif from our image object
       const randomGif = randomChoice(data);
@@ -53,10 +60,19 @@ class App extends Component {
         ...prevState,
         // here we use spread to take previous gifs and then spread them out, ten add new random gif to the end
         gifs: [...prevState.gifs,randomGif ],
+        // Turn off the loading spinner again
+        loading: false,
       }))
         // console.log(this.state.gif.index);
       // console.log(data[Math.floor(Math.random()*data.length)]);
-    } catch (error){}
+    } catch (error){
+      this.setState((prevState, props)=>({
+        ...prevState,
+        hintText: error,
+        loading: false,
+      }));
+      console.log(error)
+    }
   };
 
   // With create react app , we can write methods inside component as arrow functions instead of using constructor and bind

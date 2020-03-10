@@ -10,7 +10,7 @@ class Search extends Component {
     return(
         <div className="search grid">
           {/* Stack of gif images */}
-          {/* here we loop over our array of gif images fromt he state and create multiple videos from it */}
+          {/* here we loop over our array of gif images from the state and create multiple videos from it */}
          
           {gifs.map((gif,i) =>
           //  spread out all of our properties onto the gif component                                                                   

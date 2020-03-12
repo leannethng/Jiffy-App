@@ -26,6 +26,7 @@ class Search extends Component {
             onKeyPress={this.props.handleKeyPress}
             // Using the value in the state
             value={searchTerm}
+            ref={this.props.textInput}
             />
         </div>
     )

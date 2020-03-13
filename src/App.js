@@ -28,6 +28,7 @@ class App extends Component {
     this.focusTextInput = this.focusTextInput.bind(this);
     this.handleKeyPress = this.handleKeyPress.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.clearSearch = this.clearSearch.bind(this)
   }
  
   // A function that searches the giphy api using fetch and puts the search term into the query url and then we can use the results
@@ -109,8 +110,16 @@ class App extends Component {
     // console.log(event.key);
   };
 
+ // Method for focusing the textInput
+ focusTextInput() {
+  // textInput must be declared here so the ref can refer to it
+ // Explicitly focus the text input using the raw DOM API
+ // Note: we're accessing "current" to get the DOM node
+ this.textInput.current.focus();
+} 
   // Method that resets the set, through clearing everything out and making it default again
   clearSearch = () => {
+    this.focusTextInput();
     this.setState((prevState, props) => ({
       ...prevState,
       searchTerm:'',
@@ -123,14 +132,7 @@ class App extends Component {
     //Here we grab the input and then focus the cursor back into it
 
   }
-// Method for focusing the textInput
-  focusTextInput(props) {
-     // textInput must be declared here so the ref can refer to it
-   
-    // Explicitly focus the text input using the raw DOM API
-    // Note: we're accessing "current" to get the DOM node
-    this.textInput.current.focus();
-  }
+
 
 
   render() {

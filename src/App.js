@@ -22,10 +22,8 @@ class App extends Component {
       hintText: '',
       loading: false,
       // Creating an empty array for adding gifs to
-      gifs: [],   
+      gifs: [],
     };
-    this.textInput = React.createRef();
-    this.focusTextInput = this.focusTextInput.bind(this);
     this.handleKeyPress = this.handleKeyPress.bind(this);
     this.handleChange = this.handleChange.bind(this);
   }
@@ -117,19 +115,7 @@ class App extends Component {
       hintText: '',
       loading: false,
       gifs: [],
-      
-    })
-    )
-    //Here we grab the input and then focus the cursor back into it
-
-  }
-// Method for focusing the textInput
-  focusTextInput(props) {
-     // textInput must be declared here so the ref can refer to it
-   
-    // Explicitly focus the text input using the raw DOM API
-    // Note: we're accessing "current" to get the DOM node
-    this.textInput.current.focus();
+    }))
   }
 
 
@@ -140,7 +126,6 @@ class App extends Component {
         <Header 
           clearSearch = {this.clearSearch} 
           gifs={this.state.gifs} 
-          focusTextInput = {this.focusTextInput}
         />
        
         
@@ -151,7 +136,6 @@ class App extends Component {
           // methods/functions that manipulate state are passed down like this
           handleKeyPress={this.handleKeyPress} 
           handleChange={this.handleChange} 
-          ref={this.state.textInput}
         />
         {/* here we pass out userHint and all of our state using a spread operator */}
         <UserHint {...this.state} />

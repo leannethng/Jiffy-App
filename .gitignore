@@ -11,7 +11,7 @@
 # production
 /build
 built-lambda/lambda.js
-src/lambda/lambda.js
+
 
 
 /.netlify

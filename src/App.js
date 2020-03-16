@@ -39,7 +39,7 @@ class App extends Component {
     // first try fetch, if it fails it gets caught below
     try {
       const response = await fetch(
-        `https://api.giphy.com/v1/gifs/search?api_key=${process.env.REACT_APP_API_KEY}=${searchTerm}&limit=25&offset=0&rating=PG&lang=en`
+        `/.netlify/functions/${searchTerm}&limit=25&offset=0&rating=PG&lang=en`
       )
       //here the raw response is converted in json data
       //instead of typing data.data we ca use this {data}

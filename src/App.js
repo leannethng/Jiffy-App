@@ -25,7 +25,6 @@ class App extends Component {
       gifs: [],   
     };
     this.textInput = React.createRef();
-    this.focusTextInput = this.focusTextInput.bind(this);
     this.handleKeyPress = this.handleKeyPress.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.clearSearch = this.clearSearch.bind(this)
@@ -110,22 +109,17 @@ class App extends Component {
     // console.log(event.key);
   };
 
- // Method for focusing the textInput
- focusTextInput() {
-  // textInput must be declared here so the ref can refer to it
- // Explicitly focus the text input using the raw DOM API
- // Note: we're accessing "current" to get the DOM node
- this.textInput.current.focus();
-} 
+
   // Method that resets the set, through clearing everything out and making it default again
   clearSearch = () => {
-    this.focusTextInput();
+    
     this.setState((prevState, props) => ({
       ...prevState,
       searchTerm:'',
       hintText: '',
       loading: false,
       gifs: [],
+      focus: this.textInput.current.focus()
       
     })
     )
@@ -154,6 +148,7 @@ class App extends Component {
           handleKeyPress={this.handleKeyPress} 
           handleChange={this.handleChange} 
           ref={this.state.textInput}
+  
         />
         {/* here we pass out userHint and all of our state using a spread operator */}
         <UserHint {...this.state} />

@@ -6,7 +6,7 @@ import Gif from './Gif'
 class Search extends Component {
 
   render(){
-    const { searchTerm, gifs } = this.props;
+    const { searchTerm, gifs, textInput } = this.props;
     return(
         <div className="search grid">
           {/* Stack of gif images */}
@@ -26,7 +26,7 @@ class Search extends Component {
             onKeyPress={this.props.handleKeyPress}
             // Using the value in the state
             value={searchTerm}
-            ref={this.textInput}
+            ref={textInput}
             />
         </div>
     )

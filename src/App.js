@@ -6,7 +6,7 @@ import UserHint from './components/UserHint'
 
 
 
-// Create a random choice funtion which takes in an array and returns a random index number. This is a closure!
+// Create a random choice function which takes in an array and returns a random index number. This is a closure!
 const randomChoice = arr => {
   const randIndex = Math.floor(Math.random()*arr.length);
   console.log(arr[randIndex]);
@@ -39,7 +39,7 @@ class App extends Component {
     // first try fetch, if it fails it gets caught below
     try {
       const response = await fetch(
-        `/.netlify/functions/${searchTerm}&limit=25&offset=0&rating=PG&lang=en`
+        `/.netlify/functions/lambda=${searchTerm}&limit=25&offset=0&rating=PG&lang=en`
       )
       //here the raw response is converted in json data
       //instead of typing data.data we ca use this {data}

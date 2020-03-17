@@ -18,14 +18,14 @@
 // }
 
 import fetch from 'node-fetch';
-
 const giphyApiRootUrl = 'https://api.giphy.com/v1'
 const giphyApiKey = process.env.REACT_APP_API_KEY; // Here we hide value in environment
 
 exports.handler = async (event) => {
   // We can retrieve type of http method in event parameter
   const { httpMethod } = event;
-  
+
+
   if (httpMethod === 'GET') {
     const response = await fetch(`${giphyApiRootUrl}/gifs/search?api_key=${giphyApiKey}`, { 'content-type': 'application/json' })  
     const gifData = await response.text();

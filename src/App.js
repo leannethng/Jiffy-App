@@ -6,7 +6,7 @@ import UserHint from './components/UserHint'
 
 
 
-// Create a random choice funtion which takes in an array and returns a random index number. This is a closure!
+// Create a random choice function which takes in an array and returns a random index number. This is a closure!
 const randomChoice = arr => {
   const randIndex = Math.floor(Math.random()*arr.length);
   console.log(arr[randIndex]);
@@ -136,6 +136,7 @@ class App extends Component {
           // methods/functions that manipulate state are passed down like this
           handleKeyPress={this.handleKeyPress} 
           handleChange={this.handleChange} 
+          clearSearch = {this.clearSearch} 
         />
         {/* here we pass out userHint and all of our state using a spread operator */}
         <UserHint {...this.state} />

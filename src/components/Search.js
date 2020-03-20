@@ -7,6 +7,7 @@ class Search extends Component {
 
   render(){
     const { searchTerm, gifs } = this.props;
+    // const noSearchTerm = gifs.length < 1;
     return(
         <div className="search grid">
           {/* Stack of gif images */}
@@ -18,6 +19,7 @@ class Search extends Component {
           )}
           {/* Input field */}
           <input
+            // autoFocus = {noSearchTerm ? true: false}
             className="input grid-item"
             placeholder="Type Something"
             // run a function
@@ -26,6 +28,7 @@ class Search extends Component {
             onKeyPress={this.props.handleKeyPress}
             // Using the value in the state
             value={searchTerm}
+           
             />
         </div>
     )
